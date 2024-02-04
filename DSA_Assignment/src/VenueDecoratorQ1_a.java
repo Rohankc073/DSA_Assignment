@@ -21,7 +21,7 @@
         6 + 1 = 7.
 */
 
-public class VenueDecorator {
+public class VenueDecoratorQ1_a {
 
     public static int findMinimumCost(int[][] costs) {
         if (costs == null || costs.length == 0 || costs[0].length == 0) {

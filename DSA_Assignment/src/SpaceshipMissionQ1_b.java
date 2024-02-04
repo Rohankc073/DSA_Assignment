@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-public class SpaceshipMission {
+public class SpaceshipMissionQ1_b {
 
     // Function to calculate the minimum time needed to build all engines
     public static int minBuildTime(int[] engines, int splitCost) {

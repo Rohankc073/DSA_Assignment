@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class SecretSharing {
+public class SecretSharingQ2_b {
     public static List<Integer> getIndividuals(int n, int[][] intervals, int firstPerson) {
         List<Integer> result = new ArrayList<>();
         Set<Integer> knownSecrets = new HashSet<>();
