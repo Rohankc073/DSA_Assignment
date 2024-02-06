@@ -1,3 +1,5 @@
+package Question2;
+
 public class MinMovesToEqualizeDressesQ2_a {
 
     public static int minMovesToEqualize(int[] sewingMachines) {
