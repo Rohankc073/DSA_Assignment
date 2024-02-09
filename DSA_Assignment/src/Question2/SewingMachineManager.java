@@ -1,3 +1,5 @@
+package Question2;
+
 public class SewingMachineManager {
 
     public static int minMovesToEqualize(int[] machines) {

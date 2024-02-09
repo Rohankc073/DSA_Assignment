@@ -1,9 +1,9 @@
-package Question6;
-
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
@@ -14,38 +14,55 @@ public class ImageDownloader extends JFrame {
     private JTextField urlField;
     private JButton downloadButton;
     private JTextArea logArea;
+    private JLabel imageLabel; // Added label for displaying the downloaded image
     private ExecutorService executorService;
     private boolean downloading;
 
     public ImageDownloader() {
         setTitle("Image Downloader");
-        setSize(400, 300);
+        setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
-        urlField = new JTextField(20);
-        downloadButton = new JButton("Download");
+        JPanel inputPanel = new JPanel(new BorderLayout());
+        urlField = new JTextField();
+        urlField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        ImageIcon downloadIcon = new ImageIcon("download.png");
+        downloadButton = new JButton("Download", downloadIcon);
+        downloadButton.setVerticalTextPosition(SwingConstants.CENTER);
+        downloadButton.setHorizontalTextPosition(SwingConstants.RIGHT);
         downloadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startDownload();
             }
         });
-        inputPanel.add(urlField);
-        inputPanel.add(downloadButton);
+
+        JPanel urlPanel = new JPanel(new BorderLayout());
+        urlPanel.add(new JLabel("URL: "), BorderLayout.WEST);
+        urlPanel.add(urlField, BorderLayout.CENTER);
+        urlPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+
+        inputPanel.add(urlPanel, BorderLayout.CENTER);
+        inputPanel.add(downloadButton, BorderLayout.EAST);
 
         logArea = new JTextArea();
+        logArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(logArea);
+
+        imageLabel = new JLabel();
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         mainPanel.add(inputPanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
+        mainPanel.add(imageLabel, BorderLayout.SOUTH); // Add image label to the bottom
 
         add(mainPanel);
 
-        executorService = Executors.newFixedThreadPool(5); // Using a fixed-size thread pool with 5 threads
+        executorService = Executors.newFixedThreadPool(5);
     }
 
     private void startDownload() {
@@ -86,16 +103,12 @@ public class ImageDownloader extends JFrame {
         @Override
         public void run() {
             try {
-                // Download image from the URL
                 URL imageUrl = new URL(url);
                 InputStream inputStream = imageUrl.openStream();
                 String fileName = url.substring(url.lastIndexOf('/') + 1);
-
-                // Specify desktop directory path
                 String desktopPath = System.getProperty("user.home") + "/Desktop/";
                 String filePath = desktopPath + fileName;
 
-                // Create FileOutputStream with desktop file path
                 FileOutputStream outputStream = new FileOutputStream(filePath);
 
                 byte[] buffer = new byte[1024];
@@ -108,15 +121,39 @@ public class ImageDownloader extends JFrame {
                 outputStream.close();
 
                 logMessage("Image downloaded: " + fileName);
+
+                // Display the downloaded image
+                displayImage(filePath);
             } catch (IOException e) {
                 logMessage("Error downloading image: " + e.getMessage());
             } finally {
                 downloading = false;
+                urlField.setText(""); // Clear the input box after download
             }
         }
     }
 
+    private void displayImage(String filePath) {
+        try {
+            BufferedImage image = ImageIO.read(new File(filePath));
+            if (image != null) {
+                ImageIcon icon = new ImageIcon(image);
+                imageLabel.setIcon(icon);
+            } else {
+                logMessage("Failed to load image: " + filePath);
+            }
+        } catch (IOException e) {
+            logMessage("Error displaying image: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
