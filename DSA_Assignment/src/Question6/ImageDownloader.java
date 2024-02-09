@@ -1,3 +1,5 @@
+package Question6;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +22,7 @@ public class ImageDownloader extends JFrame {
 
     public ImageDownloader() {
         setTitle("Image Downloader");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -28,7 +30,7 @@ public class ImageDownloader extends JFrame {
 
         JPanel inputPanel = new JPanel(new BorderLayout());
         urlField = new JTextField();
-        urlField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        urlField.setBorder(BorderFactory.createEmptyBorder(2, 5, 5, 5));
 
         ImageIcon downloadIcon = new ImageIcon("download.png");
         downloadButton = new JButton("Download", downloadIcon);
