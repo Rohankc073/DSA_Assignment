@@ -2,7 +2,7 @@ package Question1;
 
 import java.util.Arrays;
 
-public class EngineBuilder {
+public class EngineBuilderQ1_b {
 
     public static int minTimeToBuildEngines(int[] engines, int splitCost) {
         Arrays.sort(engines); // Sort engines in ascending order
