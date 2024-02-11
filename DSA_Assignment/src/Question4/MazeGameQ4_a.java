@@ -1,6 +1,8 @@
+package Question4;
+
 import java.util.*;
 
-public class MazeGame {
+public class MazeGameQ4_a {
 
     // Class to represent a cell in the grid
     static class Cell {
