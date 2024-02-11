@@ -54,7 +54,7 @@ public class KeyMazeSolver {
 
                     if (cell == 'E' || cell == 'P' || (cell >= 'a' && cell <= 'f') || (cell >= 'A' && cell <= 'F' && (keys & (1 << (cell - 'A'))) != 0)) {
                         int newKeys = keys;
-                        if (cell >= 'a' && cell <= 'f') {
+                        if (cell >= 'a') {
                             newKeys |= (1 << (cell - 'a')); // Collect the key
                         }
 
