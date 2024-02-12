@@ -16,7 +16,7 @@ public class ImageDownloader extends JFrame {
     private JTextField urlField;
     private JButton downloadButton;
     private JTextArea logArea;
-    private JLabel imageLabel; // Added label for displaying the downloaded image
+    private JLabel imageLabel;
     private ExecutorService executorService;
     private boolean downloading;
 
@@ -28,9 +28,16 @@ public class ImageDownloader extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        // Header Panel
+        JPanel headerPanel = new JPanel();
+        JLabel headerLabel = new JLabel("Image Downloader");
+        headerLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        headerPanel.add(headerLabel);
+        mainPanel.add(headerPanel, BorderLayout.NORTH);
+
         JPanel inputPanel = new JPanel(new BorderLayout());
         urlField = new JTextField();
-        urlField.setBorder(BorderFactory.createEmptyBorder(2, 5, 5, 5));
+        urlField.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         ImageIcon downloadIcon = new ImageIcon("download.png");
         downloadButton = new JButton("Download", downloadIcon);
@@ -60,7 +67,7 @@ public class ImageDownloader extends JFrame {
 
         mainPanel.add(inputPanel, BorderLayout.NORTH);
         mainPanel.add(scrollPane, BorderLayout.CENTER);
-        mainPanel.add(imageLabel, BorderLayout.SOUTH); // Add image label to the bottom
+        mainPanel.add(imageLabel, BorderLayout.SOUTH);
 
         add(mainPanel);
 
