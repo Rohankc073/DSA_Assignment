@@ -53,7 +53,6 @@ public class VenueDecoratorQ1_a {
         for (int j = 0; j < themes; j++) {
             minCost = Math.min(minCost, dp[venues - 1][j]);
         }
-
         return minCost;
     }
 
