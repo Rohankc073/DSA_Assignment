@@ -75,4 +75,6 @@ public class KeyMazeSolver {
         int result = minStepsToCollectAllKeys(maze);
         System.out.println("Minimum number of moves: " + result); // Output: 8
     }
-}
+ }
+
+

@@ -62,4 +62,4 @@ public class VenueDecoratorQ1_a {
         int result = findMinimumCost(costs);
         System.out.println("Minimum cost to decorate all venues: " + result);
     }
-}
+ }

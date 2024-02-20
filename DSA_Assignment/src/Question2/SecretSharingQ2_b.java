@@ -41,4 +41,4 @@ public class SecretSharingQ2_b {
 
         System.out.println("Individuals who will eventually know the secret: " + result);
     }
-}
+ }

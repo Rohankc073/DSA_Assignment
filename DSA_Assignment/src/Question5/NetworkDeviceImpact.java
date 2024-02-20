@@ -49,4 +49,4 @@ public class NetworkDeviceImpact {
         Collections.sort(impactedDevices);
         System.out.println("Impacted Device List: " + impactedDevices); // Output: [5, 7]
     }
-}
+ }
